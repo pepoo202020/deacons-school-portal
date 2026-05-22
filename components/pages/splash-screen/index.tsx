@@ -1,10 +1,62 @@
+'use client'
 import Image from 'next/image';
 import styles from './splash-screen.module.css'
 import logoImg from '@/public/logo.png'
 import GlobalLoader from '@/components/ui/global-loader';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { checkAuthenticate } from '@/utils/check-authenticate';
 
+interface ILoadingTextStates {
+    state: string
+    message: string
+}
+
+const loadingTexts: ILoadingTextStates[] = [
+    {state: 'initial', message: 'Initializing System...'},
+    {state: 'check', message: 'Checking credentials...'},
+    {state: 'redirect', message:"Redirecting..."}
+]
 
 export default function SplashScreen() {
+    const router = useRouter()
+    const [loadingState, setLoadingState]= useState<ILoadingTextStates>(loadingTexts[0])
+
+    useEffect(() => {
+        const initializeApp = async () => {
+            const minimumDelay = new Promise((resolve) => setTimeout(resolve, 5000));
+            setLoadingState(loadingTexts[1]);
+
+            const [_, isLoggedIn] = await Promise.all([
+                minimumDelay,
+                checkAuthenticate()
+            ]);
+
+            setLoadingState(loadingTexts[2]);
+
+            if (isLoggedIn) {
+                router.push("/dashboard");
+            } else {
+                router.push('/login');
+            }
+        };
+
+        // Handle Back-Forward Cache (BFcache) restore
+        const handlePageShow = (event: PageTransitionEvent) => {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+
+        window.addEventListener('pageshow', handlePageShow);
+        initializeApp();
+
+        return () => {
+            window.removeEventListener('pageshow', handlePageShow);
+        };
+    }, [router]);
+
+
     return (
         <section className={styles.splashScreenBody}>
             <div className={styles.splashBg}/>
@@ -35,7 +87,7 @@ export default function SplashScreen() {
 
                 {/* loader */}
                 <div className={styles.loaderContainer}>
-                    <GlobalLoader  />
+                    <GlobalLoader message={loadingState.message} isLoading />
                 </div>
                 
             </div>

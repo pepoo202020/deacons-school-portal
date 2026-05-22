@@ -5,7 +5,6 @@ import {
   BounceLoader,
   CircleLoader,
   ClimbingBoxLoader,
-  ClipLoader,
   ClockLoader,
   DotLoader,
   FadeLoader,
@@ -81,7 +80,17 @@ export default function GlobalLoader({
       case 'square': return <SquareLoader {...commonProps} {...sizeProps} />;
       case 'sync': return <SyncLoader {...commonProps} {...sizeProps} />;
       case 'clip':
-      default: return <ClipLoader {...commonProps} {...sizeProps} />;
+      default:
+        return (
+          <div
+            className="animate-spin rounded-full border-2 border-t-transparent"
+            style={{
+              borderColor: `${color} transparent ${color} ${color}`,
+              width: size || 28,
+              height: size || 28,
+            }}
+          />
+        );
     }
   };
 
