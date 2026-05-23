@@ -3,31 +3,36 @@ import Image from 'next/image';
 import styles from './splash-screen.module.css'
 import logoImg from '@/public/logo.png'
 import GlobalLoader from '@/components/ui/global-loader';
-import { useRouter } from 'next/navigation';
+import { useRouter } from "@/app/i18n/routing"; 
 import { useEffect, useState } from 'react';
 import { checkAuthenticate } from '@/utils/check-authenticate';
+import { useTranslations } from 'next-intl';
 
 interface ILoadingTextStates {
     state: string
     message: string
 }
 
-const loadingTexts: ILoadingTextStates[] = [
-    {state: 'initial', message: 'Initializing System...'},
-    {state: 'check', message: 'Checking credentials...'},
-    {state: 'redirect', message:"Redirecting..."}
-]
+
 
 export default function SplashScreen() {
+    const t = useTranslations('SplashScreen');
     const router = useRouter()
+    const loadingTexts: ILoadingTextStates[] = [
+    {state: 'initial', message: t('initializeMessage')},
+    {state: 'check', message: t('checkMessage')},
+    {state: 'redirect', message:t('redirectMessage')}
+]
     const [loadingState, setLoadingState]= useState<ILoadingTextStates>(loadingTexts[0])
+
+    
 
     useEffect(() => {
         const initializeApp = async () => {
             const minimumDelay = new Promise((resolve) => setTimeout(resolve, 5000));
             setLoadingState(loadingTexts[1]);
 
-            const [_, isLoggedIn] = await Promise.all([
+            const [, isLoggedIn] = await Promise.all([
                 minimumDelay,
                 checkAuthenticate()
             ]);
@@ -70,18 +75,24 @@ export default function SplashScreen() {
                         className={styles.logoImg}
                     />
                 </div>
-                {/* title */}
-                <h2 className={styles.title}>
-                    Management System
-                </h2>
+                {/* title - subtitle */}
+                <div className={styles.titleSubtitleContainer}>
+                    <h2 className={styles.title}>
+                        {t('title')}
+                    </h2>
+                    <h2 className={styles.subtitle}>
+                       {t('subtitle')}
+                    </h2>
+                </div>
+                
 
                 {/* verse */}
                 <div className={styles.verseContainer}>
                     <p className={styles.verseContent}>
-                        &quot;Let all things be done decently and in order.&quot;
+                        &quot;{t('verseText')}&quot;
                     </p>
                     <span className={styles.verseNumber}>
-                        1 Corinthians 14:40
+                        {t('verseNumber')}
                     </span>
                 </div>
 
@@ -94,10 +105,10 @@ export default function SplashScreen() {
             {/* footer */}
                 <div className={styles.footerContainer}>
                     <span className={styles.footerChurch}>
-                        St. Abader &amp; St. Ereny Coptic Orthodox Church
+                        {t('footerChurch')}
                     </span>
                     <span className={styles.footerVersion}>
-                        v1.0.0
+                        {t('footerVersion')}
                     </span>
                 </div>
         </section>

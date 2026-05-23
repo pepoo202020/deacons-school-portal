@@ -1,0 +1,37 @@
+{
+  "SplashScreen": {
+    "title": "مدرسة الشمامسة القبطية",
+    "subtitle": "نظام الإدارة",
+    "verseText": "وليكن كل شيء بلياقة وبحسب ترتيب.",
+    "verseNumber": "1 كورنثوس 14:40",
+    "initializeMessage": "جاري تهيئة النظام...",
+    "checkMessage": "جاري التحقق من الهوية...",
+    "redirectMessage": "جاري إعادة التوجيه...",
+    "footerChurch": "كنيسة الشهيد ابادير واختة الشهيدة ايريني",
+    "footerVersion": "النسخة 1.0.0"
+  },
+  "Theme": {
+    "light": "فاتح",
+    "dark": "داكن",
+    "system": "حسب النظام"
+  },
+  "LoginPage": {
+    "title": "مدرسة الشمامسة القبطية",
+    "subtitle": "قم بتسجيل الدخول إلى حسابك",
+    "emailMessageRequired": "البريد الإلكتروني مطلوب",
+    "emailMessageInvalid": "البريد الإلكتروني غير صالح",
+    "passwordMessageRequired": "كلمة المرور مطلوبة",
+    "passwordMessageInvalid": "يجب أن تحتوي على حرف كبير وحرف صغير ورقم ورمز.",
+    "emailLabel": "البريد الإلكتروني",
+    "passwordLabel": "كلمة المرور",
+    "rememberLabel": "تذكرني",
+    "forgotPasswordBtn": "هل نسيت كلمة السر؟",
+    "submitBtnText": "تسجيل الدخول",
+    "forgotPasswordHeader": "إعادة تعيين كلمة المرور",
+    "forgotPasswordDescription": "أرسل رسالة إلى المسؤول لإعادة تعيين كلمة المرور أو لإرسال كلمة مرورك الحالية",
+    "sendAdminBtn": "تواصل مع المسئول",
+    "loginSuccess": "تم تسجيل الدخول بنجاح.",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+    "serverError": "حدث خطأ غير متوقع."
+  }
+}

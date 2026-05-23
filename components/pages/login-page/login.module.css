@@ -1,0 +1,83 @@
+@reference "../../../app/globals.css";
+
+.loginMainContainer {
+  @apply flex flex-col items-center justify-center h-screen w-screen relative transition-colors duration-300;
+}
+
+.headerContainer {
+  @apply w-full py-10 md:py-12 px-6;
+  @apply flex justify-end items-center gap-4;
+}
+
+.languageSwitcherBtn {
+  @apply bg-transparent cursor-pointer;
+  @apply flex items-center gap-2 p-2 rounded-lg transition-colors;
+  @apply hover:bg-black/5 dark:hover:bg-white/10;
+  @apply text-[#003b93] dark:text-[#dae2ff];
+}
+
+.languageSwitcherBtnIcon {
+  @apply size-4;
+}
+
+.languageSwitcherBtnText {
+  @apply text-sm font-semibold tracking-wider;
+}
+
+.mainCardContainer {
+  @apply w-full max-w-md px-4 md:px-0 z-10 animate-fade-in-up;
+  @apply flex-1 h-full text-center  rounded-xl;
+}
+
+.contentCard {
+  @apply p-10 md:p-12 relative overflow-hidden shadow-2xl;
+}
+
+.textContentContainer {
+  @apply flex flex-col items-center mb-4  text-center;
+}
+
+.logoImage {
+  @apply w-24 h-24 object-contain mb-6 rounded-2xl drop-shadow-sm;
+}
+
+.title {
+  @apply text-[32px] md:text-[36px] leading-tight mb-2 font-bold;
+}
+
+.subtitle {
+  @apply text-base;
+}
+
+.formField {
+  @apply relative rounded-lg transition-all;
+  @apply border border-[#c3c6d5];
+  @apply bg-[#ffffff] dark:bg-[#001945];
+}
+
+.formFieldLabel {
+  @apply absolute -top-2 start-3 px-2 text-xs font-semibold w-fit;
+  @apply text-[#003b93] dark:text-[#b1c5ff] tracking-wider;
+  @apply bg-[#ffffff] dark:bg-[#001945];
+}
+
+.formFieldInput {
+  @apply w-full bg-transparent border-none py-5! px-4 text-sm rounded-lg focus:outline-none focus:ring-0;
+  @apply text-[#191c1d] dark:text-[#ffffff];
+}
+
+.formFieldError {
+  @apply text-xs text-red-700 font-bold text-start px-2;
+}
+
+.formSubmitBtn {
+  @apply w-full bg-[#003b93] dark:bg-[#b1c5ff] text-white dark:text-[#001945] hover:bg-[#002f75] dark:hover:bg-[#9cbdff] transition-all duration-300 py-3 rounded-lg font-bold shadow-lg mb-2 cursor-pointer flex items-center gap-2 justify-center;
+}
+
+.forgetPasswordBtn {
+  @apply w-full text-sm font-semibold py-2 rounded-lg transition-colors bg-transparent border border-transparent cursor-pointer tracking-wider text-[#003b93] dark:text-[#b1c5ff] hover:underline hover:underline-offset-3;
+}
+
+.sendAdminBtn {
+  @apply w-full bg-[#003b93] dark:bg-[#b1c5ff] text-white dark:text-[#001945] hover:bg-[#002f75] dark:hover:bg-[#9cbdff] transition-all duration-300 py-3  font-bold  mb-2 cursor-pointer flex items-center gap-2 justify-center;
+}

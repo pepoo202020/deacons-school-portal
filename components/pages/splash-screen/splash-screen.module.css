@@ -43,7 +43,16 @@
   @apply object-contain drop-shadow-sm;
 }
 
+.titleSubtitleContainer {
+  @apply flex flex-col gap-y-2;
+}
+
 .title {
+  @apply text-primary tracking-tight font-bold text-[40px] leading-[48px];
+  @apply md:text-[48px] md:leading-[56px];
+}
+
+.subtitle {
   @apply text-outline font-semibold text-[22px] leading-[30px];
   @apply md:text-[24px] md:leading-[32px];
 }
