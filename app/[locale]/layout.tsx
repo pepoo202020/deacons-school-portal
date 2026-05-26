@@ -2,21 +2,23 @@ import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Toaster } from "@/components/ui/sonner";
 
 const cairo = Cairo({
   subsets: ["latin", "arabic"],
   variable: "--font-cairo",
-  display: "swap"
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
     template: "%s | Coptic Deacons School",
-    default: "Coptic Deacons School | Management System"
+    default: "Coptic Deacons School | Management System",
   },
-  description: "Management System for the Coptic Deacons School at St. Abader & St. Ereny Coptic Orthodox Church.",
+  description:
+    "Management System for the Coptic Deacons School at St. Abader & St. Ereny Coptic Orthodox Church.",
 };
 
 export default async function RootLayout({
@@ -28,7 +30,7 @@ export default async function RootLayout({
 }>) {
   const { locale } = await params;
   const messages = await getMessages();
-  const direction = locale === 'ar' ? 'rtl' : 'ltr';
+  const direction = locale === "ar" ? "rtl" : "ltr";
 
   return (
     <html
@@ -46,6 +48,11 @@ export default async function RootLayout({
         >
           <NextIntlClientProvider messages={messages} locale={locale}>
             {children}
+            <Toaster
+              dir={direction}
+              richColors
+              position={locale === "ar" ? "bottom-left" : "bottom-right"}
+            />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

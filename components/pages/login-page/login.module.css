@@ -56,7 +56,7 @@
 }
 
 .formFieldLabel {
-  @apply absolute -top-2 start-3 px-2 text-xs font-semibold w-fit;
+  @apply absolute -top-2 inset-s-3 px-2 text-xs font-semibold w-fit;
   @apply text-[#003b93] dark:text-[#b1c5ff] tracking-wider;
   @apply bg-[#ffffff] dark:bg-[#001945];
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import LoginHeader from "./loginHeader";
 import { useTheme } from "next-themes";
 import styles from "./login.module.css";
@@ -14,6 +14,10 @@ import { useIsDesktop } from "@/hooks/useIsDesktop";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Link from "next/link";
 import { loginAction } from "@/actions/auth/login.action";
+import { ActionResponse } from "@/actions/types";
+import { useRouter } from "@/app/i18n/routing";
+import { toast } from "sonner";
+import GlobalLoader from "@/components/ui/global-loader";
 
 export default function LoginIndex() {
   const { resolvedTheme } = useTheme();
@@ -21,7 +25,10 @@ export default function LoginIndex() {
   const [mounted, setMounted] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [isPending, startTransition] = useTransition();
+  const [globalError, setGlobalError] = useState<string | null>(null);
   const isDesktop = useIsDesktop();
+  const router = useRouter();
 
   const locale = useLocale();
   const isRtl = locale === "ar";
@@ -30,34 +37,44 @@ export default function LoginIndex() {
     defaultValues: {
       email: "",
       password: "",
-      rememberMe: false,
     },
   });
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-  }, []);
+  }, [isPending]);
 
   const isDark = mounted && resolvedTheme === "dark";
 
-  async function onLoginSubmit(data: LoginValues) {
-    try {
-      const response = await loginAction(data);
-      form.setValues({
-        email: "",
-        password: "",
-        rememberMe: false,
-      });
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-      form.setValues({
-        email: "",
-        password: "",
-        rememberMe: false,
-      });
-    }
+  function onLoginSubmit(data: LoginValues) {
+    setGlobalError(null);
+
+    startTransition(async () => {
+      try {
+        const response: ActionResponse = await loginAction(data);
+
+        if (response.success && response.data?.redirectUrl) {
+          toast.success(response.message);
+          router.push(response.data?.redirectUrl);
+        } else {
+          setGlobalError(response.message);
+          toast.error(globalError);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    });
+    form.setValues({
+      email: "",
+      password: "",
+    });
+  }
+
+  if (isPending) {
+    return (
+      <GlobalLoader fullScreen isLoading={isPending} message={t("signingIn")} />
+    );
   }
 
   return (
@@ -91,7 +108,6 @@ export default function LoginIndex() {
           <LoginForm
             emailLabel={t("emailLabel")}
             passwordLabel={t("passwordLabel")}
-            rememberLabel={t("rememberLabel")}
             submitBtnText={t("submitBtnText")}
             onLoginSubmit={onLoginSubmit}
             form={form}

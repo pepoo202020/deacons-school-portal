@@ -24,7 +24,6 @@
     "passwordMessageInvalid": "يجب أن تحتوي على حرف كبير وحرف صغير ورقم ورمز.",
     "emailLabel": "البريد الإلكتروني",
     "passwordLabel": "كلمة المرور",
-    "rememberLabel": "تذكرني",
     "forgotPasswordBtn": "هل نسيت كلمة السر؟",
     "submitBtnText": "تسجيل الدخول",
     "forgotPasswordHeader": "إعادة تعيين كلمة المرور",
@@ -32,6 +31,7 @@
     "sendAdminBtn": "تواصل مع المسئول",
     "loginSuccess": "تم تسجيل الدخول بنجاح.",
     "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-    "serverError": "حدث خطأ غير متوقع."
+    "serverError": "حدث خطأ غير متوقع.",
+    "signingIn": "جاري تسجيل الدخول ........"
   }
 }

@@ -11,13 +11,10 @@ import { LoginValues } from "@/zod/login-form";
 import { Dispatch, SetStateAction } from "react";
 import { Controller, UseFormReturn } from "react-hook-form";
 import { Eye, EyeOff, LogIn } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useLocale } from "next-intl";
 
 interface ILoginFormProps {
   emailLabel: string;
   passwordLabel: string;
-  rememberLabel: string;
   submitBtnText: string;
   onLoginSubmit: (data: LoginValues) => void;
   form: UseFormReturn<LoginValues>;
@@ -29,7 +26,6 @@ interface ILoginFormProps {
 export default function LoginForm({
   emailLabel,
   passwordLabel,
-  rememberLabel,
   submitBtnText,
   onLoginSubmit,
   form,
@@ -116,31 +112,6 @@ export default function LoginForm({
                   errors={[fieldState.error]}
                 />
               )}
-            </Field>
-          )}
-        />
-        <Controller
-          control={form.control}
-          name="rememberMe"
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid} orientation="horizontal">
-              <div className="flex items-center justify-start w-full gap-2">
-                <Checkbox
-                  id="terms-checkbox-invalid"
-                  name="terms-checkbox-invalid"
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                  aria-invalid
-                  className="rounded! w-4! h-4! text-white! border-primary! focus:ring-0! cursor-pointer"
-                  style={{ accentColor: "#003b93" }}
-                />
-                <FieldLabel
-                  htmlFor="terms-checkbox-invalid"
-                  className="cursor-pointer! text-base"
-                >
-                  {rememberLabel}
-                </FieldLabel>
-              </div>
             </Field>
           )}
         />
